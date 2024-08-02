@@ -98,7 +98,9 @@ export default function Home() {
                 setItemName('')
                 handleClose()
               }}
-            ></Button>
+            >
+              Add
+            </Button>
             </Stack>
         </Box>
       </Modal>
