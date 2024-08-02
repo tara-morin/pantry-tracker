@@ -112,8 +112,15 @@ export default function Home() {
       >
         Add New Item
       </Button>
-    <Typography variant= "h1"> Inventory Management</Typography>
-    
+    <Box border= "1px solid #333">
+      <Box
+      width= "800px"
+      height= "100px"
+        >
+        
+      </Box>
+
+    </Box>
     </Box>
 }
 
