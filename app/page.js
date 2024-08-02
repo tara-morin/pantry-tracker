@@ -127,12 +127,11 @@ export default function Home() {
           Inventory Items
         </Typography>
       </Box>
-    </Box>
     <Stack
       width= "100px"
       height= "300px"
       spacing= {2}
-      overflow= "auto" /*handles how too many itmes work. hidden would hide the etxra items */
+      overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
       {
       inventory.map(({name, quantity})=> (
@@ -170,6 +169,7 @@ export default function Home() {
       ))
     }
     </Stack>
+    </Box>
     </Box>
 }
 
