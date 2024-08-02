@@ -82,11 +82,16 @@ export default function Home() {
           }}
         >
           <Typography variant= "h6"> Add items</Typography>
-          <Stack width= "100%" direction= "row" spacing= {2}> </Stack>
+          <Stack width= "100%" direction= "row" spacing= {2}>
             <TextField>
-
+              variant= "outlined"
+              fullWidth
+              value= {itemName}
+              onChange= {(e)=> {
+                setItemName(e.target.value)
+              }}
             </TextField>
-           
+          </Stack>
         </Box>
       </Modal>
       
