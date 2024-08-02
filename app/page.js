@@ -91,7 +91,15 @@ export default function Home() {
                 setItemName(e.target.value)
               }}
             </TextField>
-          </Stack>
+            <Button
+              variant= "outlined"
+              onClick= {() => {
+                addItem(itemName)
+                setItemName('')
+                handleClose()
+              }}
+            ></Button>
+            </Stack>
         </Box>
       </Modal>
       
