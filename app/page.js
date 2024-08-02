@@ -61,15 +61,6 @@ export default function Home() {
           alignItems= "center" gap={2}> 
           /* 100 means it will be 100% the width of the component */
           /* justifycontent centers it horixontally, align items centers it vertically*/
-    <Modal open= {open} onClose= {handleClose}>
-      <Box position= "absolute" top= "50%" 
-      left= "50%" transform= "translate(-50%, -50%)" /*translate does extra work to center it*/
-      bgcolor= "palegreen" border= "2px solid #000" /* 000 represents the color*/
-      boxShadow= {24} p={4} /* p is padding*/
-      display= "flex" flexDirection="column" gap={3}
-      ></Box>
-      <Typography variant= "h6"> Add items</Typography>
-    </Modal>
 
     <Typography variant= "h1"> Inventory Management</Typography>
     
