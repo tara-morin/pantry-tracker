@@ -7,7 +7,7 @@ import {collection, deleteDoc, getDocs, query, setDoc} from 'firebase/firestore'
 
 export default function Home() {
   const [inventory, setInventory]= useState([])
-  const [open, setOpen]= useState(false)
+  const [open, setOpen]= useState(true)
   const [itemName, setItemName]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
