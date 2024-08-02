@@ -118,12 +118,13 @@ export default function Home() {
       width= "800px"
       height= "100px"
       bgcolor= "#ADD8E6"
+      display= "flex"
+      alignItems= "center"
+      justifyContent= "center"
         >
         <Typography 
           variant= "h2" 
-          color= "#333" 
-          display= "flex"
-          justifyContent="center">
+          color= "#333">
           Inventory Items
         </Typography>
       </Box>
