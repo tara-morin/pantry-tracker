@@ -128,7 +128,7 @@ export default function Home() {
         </Typography>
       </Box>
     <Stack
-      width= "100px"
+      width= "800px"
       height= "300px"
       spacing= {2}
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
@@ -159,6 +159,7 @@ export default function Home() {
           >
             {quantity}
           </Typography>
+          
           <Button 
             variant= "contained"
             onClick= { ()=> {
