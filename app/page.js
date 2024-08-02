@@ -60,6 +60,7 @@ export default function Home() {
           width="100vw" 
           height= "100vh" 
           display= "flex" 
+          flexDirection= "column" /*makes it so the button and box aren't side by side*/
           justifyContent="center"
           alignItems= "center" 
           gap={2}
@@ -116,11 +117,59 @@ export default function Home() {
       <Box
       width= "800px"
       height= "100px"
+      bgcolor= "#ADD8E6"
         >
-        
+        <Typography 
+          variant= "h2" 
+          color= "#333" 
+          display= "flex"
+          justifyContent="center">
+          Inventory Items
+        </Typography>
       </Box>
-
     </Box>
+    <Stack
+      width= "100px"
+      height= "300px"
+      spacing= {2}
+      overflow= "auto" /*handles how too many itmes work. hidden would hide the etxra items */
+    >
+      {
+      inventory.map(({name, quantity})=> (
+        <Box
+          key= {name}
+          width= "100%"
+          minHeight= "150px"
+          display= "flex"
+          alignItems="center"
+          justifyContent= "source-between"
+          bgColor= "#f0f0f0"
+          padding= {5}
+        >
+          <Typography
+            variant= "h3"
+            color= "#333"
+            textAlign= "center"
+          >
+            {name.charAt(0).toUppercase()+ name.slice(1)}
+          </Typography>
+          <Typography
+            variant= "h3"
+            color= "#333"
+            textAlign= "center"
+          >
+            {quantity}
+          </Typography>
+          <Button 
+            variant= "contained"
+            onClick= { ()=> {
+              removeItem(name)
+            }}
+        > Remove </Button>
+        </Box>
+      ))
+    }
+    </Stack>
     </Box>
 }
 
