@@ -150,7 +150,7 @@ export default function Home() {
             color= "#333"
             textAlign= "center"
           >
-            {name.charAt(0).toUppercase()+ name.slice(1)}
+            {name}
           </Typography>
           <Typography
             variant= "h3"
