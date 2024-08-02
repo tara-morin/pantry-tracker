@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {firestore} from '@/firebase'
-import {Box, Modal, Typography} from '@mui/material'
+import {Box, Modal, Typography, Stack, TextField} from '@mui/material'
 import {collection, deleteDoc, getDocs, query, setDoc} from 'firebase/firestore'
 
 export default function Home() {
@@ -56,13 +56,46 @@ export default function Home() {
 
   const handleOpen= ()=> setOpen(true)
   const handleClose= () => setOpen(false)
-  return <Box width="100vw" height= "100vh" 
-          display= "flex" justifyContent="center"
-          alignItems= "center" gap={2}> 
-          /* 100 means it will be 100% the width of the component */
-          /* justifycontent centers it horixontally, align items centers it vertically*/
+  return <Box 
+          width="100vw" 
+          height= "100vh" 
+          display= "flex" 
+          justifyContent="center"
+          alignItems= "center" 
+          gap={2}
+          > 
+      <Modal open= {open} onClose= {handleClose}>
+        <Box 
+          position= "absolute" 
+          top= "50%" 
+          left= "50%" 
+          width= {400}
+          bgcolor= "palegreen" 
+          border= "2px solid #000" 
+          boxShadow= {24} 
+          p={4} 
+          display= "flex" 
+          flexDirection="column" 
+          gap={3}
+          sx={{
+            transform:"translate(-50%, -50%)" 
+          }}
+        >
+          <Typography variant= "h6"> Add items</Typography>
+          <Stack width= "100%" direction= "row" spacing= {2}> </Stack>
+            <TextField>
 
+            </TextField>
+           
+        </Box>
+      </Modal>
+      
     <Typography variant= "h1"> Inventory Management</Typography>
     
     </Box>
 }
+
+/* 100 means it will be 100% the width of the component, justifycontent centers it horixontally, align items centers it vertically*/
+/*translate does extra work to center it*/
+/* 000 represents the color*/
+/* p is padding*/
