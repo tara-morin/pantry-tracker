@@ -82,7 +82,7 @@ export default function Home() {
           }}
         >
           <Typography variant= "h6"> Add items</Typography>
-          <Stack width= "100%" direction= "row" spacing= {2}>
+          <Stack direction= "row" spacing= {2}>
             <TextField>
               variant= "outlined"
               fullWidth
