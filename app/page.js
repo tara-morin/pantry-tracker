@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {firestore} from '@/firebase'
 import {Box, Modal, Typography, Stack, TextField, Button} from '@mui/material'
-import {collection, deleteDoc, getDocs, query, setDoc, getDoc} from 'firebase/firestore'
+import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
 
 export default function Home() {
   const [inventory, setInventory]= useState([])
@@ -20,10 +20,9 @@ export default function Home() {
       ...doc.data(),
     })})
     setInventory(inventoryList)
-    console.log(inventoryList)
   }
   const removeItem= async(item)=> {
-    const docRef= doc(collection(firestore, 'inventory'), item) /*gets us an item directly without having to cycle through all like earlier */
+    const docRef= doc(collection(firestore, 'inventory'), item)
     const docInfo= await getDoc(docRef) /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
@@ -52,7 +51,7 @@ export default function Home() {
   }
 
   useEffect( ()=> { /*runs the code in these brackets whenever something in the depency array changes */
-    updateInventory() }, []) /*empty depency array, so inventory is only updated when page loads */
+    updateInventory() }, []) /*empty dependency array, so inventory is only updated when page loads */
 
   const handleOpen= ()=> setOpen(true)
   const handleClose= () => setOpen(false)
