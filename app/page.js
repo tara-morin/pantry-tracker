@@ -55,7 +55,7 @@ export default function Home() {
 
   const handleOpen= ()=> setOpen(true)
   const handleClose= () => setOpen(false)
-  return <Box 
+  return (<Box 
           width="100vw" 
           height= "100vh" 
           display= "flex" 
@@ -159,7 +159,6 @@ export default function Home() {
           >
             {quantity}
           </Typography>
-          
           <Button 
             variant= "contained"
             onClick= { ()=> {
@@ -172,6 +171,7 @@ export default function Home() {
     </Stack>
     </Box>
     </Box>
+  )
 }
 
 /* 100 means it will be 100% the width of the component, justifycontent centers it horixontally, align items centers it vertically*/
