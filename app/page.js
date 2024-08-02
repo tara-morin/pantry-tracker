@@ -112,3 +112,4 @@ export default function Home() {
 /*translate does extra work to center it*/
 /* 000 represents the color*/
 /* p is padding*/
+/* sx means the style is being directly applied to it*/
