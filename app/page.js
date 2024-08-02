@@ -7,7 +7,7 @@ import {collection, deleteDoc, getDocs, query, setDoc} from 'firebase/firestore'
 
 export default function Home() {
   const [inventory, setInventory]= useState([])
-  const [open, setOpen]= useState(true)
+  const [open, setOpen]= useState(false)
   const [itemName, setItemName]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
@@ -104,7 +104,14 @@ export default function Home() {
             </Stack>
         </Box>
       </Modal>
-      
+      <Button 
+        variant= "contained"
+        onClick= { ()=> {
+          handleOpen()
+        }}
+      >
+        Add New Item
+      </Button>
     <Typography variant= "h1"> Inventory Management</Typography>
     
     </Box>
