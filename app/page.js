@@ -23,7 +23,7 @@ export default function Home() {
     setInventory(inventoryList)
   }
   const removeItem= async(itemName)=> {
-    const docRef= doc(collection(firestore,'inventory'), itemName)
+    const docRef= doc(collection(firestore,'inventory'), 'cheese')
     const docInfo= await getDoc(docRef) /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
