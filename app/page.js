@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {firestore} from '@/firebase'
 import {Box, Modal, Typography, Stack, TextField, Button} from '@mui/material'
-import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
+import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc, set} from 'firebase/firestore'
 
 export default function Home() {
   const [inventory, setInventory]= useState([])
@@ -36,19 +36,21 @@ export default function Home() {
     }
     await updateInventory()
   }
-  const addItem= async(item)=> {
-    const docRef= doc(collection(firestore, 'inventory'), item) /*gets us an item directly without having to cycle through all like earlier */
-    const docInfo= await getDoc(docRef) /*gets the doc if it exists */
+  const addItem= async(itemName)=> {
+
+    const docRef= doc(collection(firestore, 'inventory'), itemName); /*gets us an item directly without having to cycle through all like earlier */
+    const docInfo= await getDoc(docRef); /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
       const {quantity}= docInfo.data()
-      await setDoc(docRef, {quantity: quantity+1})
+      setDoc(docRef, {quantity: quantity+1})
     }
     else{
-      await setDoc(docRef, {quantity:1})
+      setDoc(docRef, {quantity:1})
     }
     await updateInventory()
   }
+
 
   useEffect( ()=> { /*runs the code in these brackets whenever something in the depency array changes */
     updateInventory() }, []) /*empty dependency array, so inventory is only updated when page loads */
