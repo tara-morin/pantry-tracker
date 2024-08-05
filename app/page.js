@@ -11,11 +11,10 @@ export default function Home() {
   const [itemName, setItemName]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
-    const current_inventory= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
-    const docs= await getDocs(current_inventory) 
-    console.log(docs)
+    const snapshot= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
+    const docs= await getDocs(snapshot)
     const inventoryList= [] /*makes empty list to put our items in */
-    docs.forEach( (doc)=> { /*for each doc in the inventory collection we add it to the list */
+    docs.forEach((doc)=> { /*for each doc in the inventory collection we add it to the list */
     inventoryList.push({
       name: doc.id,
       ...doc.data(),
@@ -23,11 +22,12 @@ export default function Home() {
     setInventory(inventoryList)
   }
   const removeItem= async(itemName)=> {
-    const docRef= doc(collection(firestore,'inventory'), 'cheese')
-    const docInfo= await getDoc(docRef) /*gets the doc if it exists */
+    const docRef= doc(collection(firestore,'inventory'), itemName)
+    const docSnap= await getDoc(docRef) /*gets the doc if it exists */
 
-    if (docInfo.exists()){ 
-      const {quantity}= docInfo.data()
+    if (docSnap.exists()){ 
+      const {quantity}= docSnap.data()
+      
       if (quantity==1){ /* if there's only one of it just delete the item */
         await deleteDoc(docRef)
       }
@@ -39,15 +39,15 @@ export default function Home() {
   }
   const addItem= async(item)=> {
 
-    const docRef= doc(collection(firestore,'inventory'), item); /*gets us an item directly without having to cycle through all like earlier */
-    const docInfo= await getDoc(docRef); /*gets the doc if it exists */
+    const docRef= doc(collection(firestore,'inventory'), item)
+    const docSnap= await getDoc(docRef)
 
-    if (docInfo.exists()){ 
-      const {quantity}= docInfo.data()
-      setDoc(docRef, {quantity: quantity+1})
+    if (docSnap.exists()){ 
+      const {quantity}= docSnap.data()
+      await setDoc(docRef, {quantity: quantity+1})
     }
     else{
-      setDoc(docRef, {quantity:1})
+      await setDoc(docRef, {quantity:1})
     }
     await updateInventory()
   }
