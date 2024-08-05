@@ -37,9 +37,9 @@ export default function Home() {
     }
     await updateInventory()
   }
-  const addItem= async(item)=> {
+  const addItem= async(itemName)=> {
 
-    const docRef= doc(collection(firestore,'inventory'), item)
+    const docRef= doc(collection(firestore,'inventory'),itemName)
     const docSnap= await getDoc(docRef)
 
     if (docSnap.exists()){ 
@@ -60,24 +60,24 @@ export default function Home() {
   const handleClose= () => setOpen(false)
   return (<Box 
           width="100vw" 
-          height= "100vh" 
-          display= "flex" 
-          flexDirection= "column" /*makes it so the button and box aren't side by side*/
+          height="100vh" 
+          display="flex" 
+          flexDirection="column" /*makes it so the button and box aren't side by side*/
           justifyContent="center"
           alignItems= "center" 
           gap={2}
           > 
       <Modal open= {open} onClose= {handleClose}>
         <Box 
-          position= "absolute" 
-          top= "50%" 
-          left= "50%" 
-          width= {400}
-          bgcolor= "palegreen" 
-          border= "2px solid #000" 
-          boxShadow= {24} 
+          position="absolute" 
+          top="50%" 
+          left="50%" 
+          width={400}
+          bgcolor="palegreen" 
+          border="2px solid #000" 
+          boxShadow={24} 
           p={4} 
-          display= "flex" 
+          display="flex" 
           flexDirection="column" 
           gap={3}
           sx={{
@@ -85,18 +85,18 @@ export default function Home() {
           }}
         >
           <Typography variant= "h6"> Add items</Typography>
-          <Stack direction= "row" spacing= {2}>
+          <Stack direction="row" spacing={2}>
             <TextField>
-              variant= "outlined"
+              variant="outlined"
               fullWidth
-              value= {itemName}
-              onChange= {(e)=> {
+              value={itemName}
+              onChange={(e)=> {
                 setItemName(e.target.value)
               }}
             </TextField>
             <Button
-              variant= "outlined"
-              onClick= {() => {
+              variant="outlined"
+              onClick={() => {
                 addItem(itemName)
                 setItemName('')
                 handleClose()
@@ -108,8 +108,8 @@ export default function Home() {
         </Box>
       </Modal>
       <Button 
-        variant= "contained"
-        onClick= { ()=> {
+        variant="contained"
+        onClick={()=> {
           handleOpen()
         }}
       >
@@ -117,54 +117,54 @@ export default function Home() {
       </Button>
     <Box border= "1px solid #333">
       <Box
-      width= "800px"
-      height= "100px"
-      bgcolor= "#ADD8E6"
-      display= "flex"
-      alignItems= "center"
-      justifyContent= "center"
+      width="800px"
+      height="100px"
+      bgcolor="#ADD8E6"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
         >
         <Typography 
           variant= "h2" 
-          color= "#333">
+          color="#333">
           Inventory Items
         </Typography>
       </Box>
     <Stack
       width= "800px"
       height= "300px"
-      spacing= {2}
+      spacing={2}
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
       {
       inventory.map(({name, quantity})=> (
         <Box
           key= {name}
-          width= "100%"
-          minHeight= "150px"
-          display= "flex"
+          width="100%"
+          minHeight="150px"
+          display="flex"
           alignItems="center"
-          justifyContent= "source-between"
-          bgColor= "#f0f0f0"
-          padding= {5}
+          justifyContent="source-between"
+          bgColor="#f0f0f0"
+          padding={5}
         >
           <Typography
-            variant= "h3"
-            color= "#333"
-            textAlign= "center"
+            variant="h3"
+            color="#333"
+            textAlign="center"
           >
             {name}
           </Typography>
           <Typography
-            variant= "h3"
-            color= "#333"
-            textAlign= "center"
+            variant="h3"
+            color="#333"
+            textAlign="center"
           >
             {quantity}
           </Typography>
           <Button 
-            variant= "contained"
-            onClick= { ()=> {
+            variant="contained"
+            onClick={()=> {
               removeItem(name)
             }}
         > Remove </Button>
