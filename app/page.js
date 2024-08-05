@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import {firestore} from '@/firebase'
 import {Box, Modal, Typography, Stack, TextField, Button} from '@mui/material'
-import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc, set} from 'firebase/firestore'
+import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
 
 export default function Home() {
   const [inventory, setInventory]= useState([])
@@ -11,8 +11,9 @@ export default function Home() {
   const [itemName, setItemName]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
-    const current_inventory= query(collection(firestore, 'inventory')) /*query to look at items in inventory firebase */
+    const current_inventory= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
     const docs= await getDocs(current_inventory) 
+    console.log(docs)
     const inventoryList= [] /*makes empty list to put our items in */
     docs.forEach( (doc)=> { /*for each doc in the inventory collection we add it to the list */
     inventoryList.push({
@@ -22,7 +23,7 @@ export default function Home() {
     setInventory(inventoryList)
   }
   const removeItem= async(item)=> {
-    const docRef= doc(collection(firestore, 'inventory'), item)
+    const docRef= doc(collection(firestore,'inventory'), item)
     const docInfo= await getDoc(docRef) /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
@@ -38,7 +39,7 @@ export default function Home() {
   }
   const addItem= async(itemName)=> {
 
-    const docRef= doc(collection(firestore, 'inventory'), itemName); /*gets us an item directly without having to cycle through all like earlier */
+    const docRef= doc(collection(firestore,'inventory'), itemName); /*gets us an item directly without having to cycle through all like earlier */
     const docInfo= await getDoc(docRef); /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
