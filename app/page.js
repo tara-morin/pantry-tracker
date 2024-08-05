@@ -22,8 +22,8 @@ export default function Home() {
     })})
     setInventory(inventoryList)
   }
-  const removeItem= async(item)=> {
-    const docRef= doc(collection(firestore,'inventory'), item)
+  const removeItem= async(itemName)=> {
+    const docRef= doc(collection(firestore,'inventory'), itemName)
     const docInfo= await getDoc(docRef) /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
@@ -37,9 +37,9 @@ export default function Home() {
     }
     await updateInventory()
   }
-  const addItem= async(itemName)=> {
+  const addItem= async(item)=> {
 
-    const docRef= doc(collection(firestore,'inventory'), itemName); /*gets us an item directly without having to cycle through all like earlier */
+    const docRef= doc(collection(firestore,'inventory'), item); /*gets us an item directly without having to cycle through all like earlier */
     const docInfo= await getDoc(docRef); /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
