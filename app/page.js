@@ -39,7 +39,7 @@ export default function Home() {
   }
   const addItem= async(itemName)=> {
 
-    const docRef= doc(collection(firestore,'inventory'), 'pork'); /*gets us an item directly without having to cycle through all like earlier */
+    const docRef= doc(collection(firestore,'inventory'), itemName); /*gets us an item directly without having to cycle through all like earlier */
     const docInfo= await getDoc(docRef); /*gets the doc if it exists */
 
     if (docInfo.exists()){ 
