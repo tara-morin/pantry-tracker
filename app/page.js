@@ -218,16 +218,12 @@ export default function Home() {
           <Typography
             variant="h5"
             color="#333"
-            textAlign="center"
-            justifyContent="center"
           >
             <Box sx= {{textTransform: 'capitalize'}}>{brand}</Box>
           </Typography>
           <Typography
             variant="h5"
             color="#333"
-            textAlign="center"
-            justifyContent="center"
           >
             <Box sx= {{textTransform: 'capitalize'}}>{name}</Box>
           </Typography>
