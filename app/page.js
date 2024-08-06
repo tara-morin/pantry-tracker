@@ -8,7 +8,7 @@ import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'fireba
 export default function Home() {
   const [inventory, setInventory]= useState([])
   const [open, setOpen]= useState(false)
-  const [itemName, setItemName]= useState('')
+  const [itemName, setItemName, setExpiration]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
     const snapshot= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
@@ -27,7 +27,6 @@ export default function Home() {
 
     if (docSnap.exists()){ 
       const {quantity}= docSnap.data()
-      
       if (quantity==1){ /* if there's only one of it just delete the item */
         await deleteDoc(docRef)
       }
@@ -37,7 +36,7 @@ export default function Home() {
     }
     await updateInventory()
   }
-  const addItem= async(itemName)=> {
+  const addItem= async(itemName, date)=> {
 
     const docRef= doc(collection(firestore,'inventory'),itemName)
     const docSnap= await getDoc(docRef)
@@ -47,7 +46,7 @@ export default function Home() {
       await setDoc(docRef, {quantity: quantity+1})
     }
     else{
-      await setDoc(docRef, {quantity:1})
+      await setDoc(docRef, {quantity:1, expire:date})
     }
     await updateInventory()
   }
@@ -64,7 +63,7 @@ export default function Home() {
           display="flex" 
           flexDirection="column" /*makes it so the button and box aren't side by side*/
           justifyContent="center"
-          alignItems= "center" 
+          alignItems="center" 
           gap={2}
           > 
       <Modal open= {open} onClose= {handleClose}>
@@ -94,10 +93,18 @@ export default function Home() {
               setItemName(e.target.value)
             }}
           />
+          <TextField
+            variant="outlined"
+            fullWidth
+            value={expire}
+            onChange={(e) => {
+              setExpiration(e.target.value)
+            }}
+          />
             <Button
               variant="outlined"
               onClick={() => {
-                addItem(itemName)
+                addItem(itemName, expire)
                 setItemName('')
                 handleClose()
               }}
@@ -137,7 +144,7 @@ export default function Home() {
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
       {
-      inventory.map(({name, quantity})=> (
+      inventory.map(({name, quantity, expire})=> (
         <Box
           key= {name}
           width="100%"
@@ -161,6 +168,13 @@ export default function Home() {
             textAlign="center"
           >
             {quantity}
+          </Typography>
+          <Typography
+            variant="h3"
+            color="#333"
+            textAlign="center"
+          >
+            {expire}
           </Typography>
           <Button 
             variant="contained"
