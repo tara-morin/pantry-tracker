@@ -190,8 +190,8 @@ export default function Home() {
           Inventory Items
         </Typography>
       </Box>
-      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" >
-    <Stack display="flex" justifyContent="space-evenly" width= "700px" height= "100px" flexDirection="row" spacing= {2} divider={<Divider orientation="vertical" flexItem />}>
+      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" padding= {7} >
+    <Stack alignItems= "center" display="flex" justifyContent="space-around" width= "700px" height= "100px" flexDirection="row" spacing= {2} divider={<Divider orientation="vertical" flexItem />}>
     <Typography variant= "h6"> Brand</Typography>
     <Typography variant= "h6"> Item</Typography>
     <Typography variant= "h6"> Quantity</Typography>
@@ -219,31 +219,32 @@ export default function Home() {
           <Typography
             variant="h5"
             color="#333"
-            textAlign="right"
+            textAlign="center"
             justifyContent="center"
           >
-            {brand}
+            <Box sx= {{textTransform: 'capitalize'}}>{brand}</Box>
           </Typography>
           <Typography
             variant="h4"
             color="#333"
             textAlign="center"
+            justifyContent="center"
           >
-            {name}
+            <Box sx= {{textTransform: 'capitalize'}}>{name}</Box>
           </Typography>
           <Typography
             variant="h4"
             color="#333"
-            textAlign="right"
-            justifyContent="right"
+            textAlign="center"
+            justifyContent="center"
           >
             {quantity}
           </Typography>
           <Typography
             variant="h5"
             color="#333"
-            textAlign="right"
-            justifyContent="right"
+            textAlign="center"
+            justifyContent="center"
           >
             {expire}
           </Typography>
