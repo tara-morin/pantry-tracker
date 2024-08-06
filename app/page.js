@@ -230,16 +230,13 @@ export default function Home() {
           <Typography
             variant="h5"
             color="#333"
-            textAlign="center"
-            justifyContent="center"
+
           >
             {quantity}
           </Typography>
           <Typography
             variant="h5"
             color="#333"
-            textAlign="center"
-            justifyContent="center"
           >
             {expire}
           </Typography>
