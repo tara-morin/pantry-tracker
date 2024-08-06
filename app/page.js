@@ -86,14 +86,14 @@ export default function Home() {
         >
           <Typography variant= "h6"> Add items</Typography>
           <Stack direction="row" spacing={2}>
-            <TextField>
-              variant="outlined"
-              fullWidth
-              value={itemName}
-              onChange={(e)=> {
-                setItemName(e.target.value)
-              }}
-            </TextField>
+          <TextField
+            variant="outlined"
+            fullWidth
+            value={itemName}
+            onChange={(e) => {
+              setItemName(e.target.value)
+            }}
+          />
             <Button
               variant="outlined"
               onClick={() => {
