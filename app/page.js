@@ -121,7 +121,7 @@ export default function Home() {
           handleOpen()
         }}
         sx={{
-          ":hover": {bgcolor: "darkblue"}
+          ":hover": {bgcolor: "green"}
         }}
       >
         Add New Item
@@ -157,7 +157,7 @@ export default function Home() {
           alignItems="center"
           justifyContent="space-between"
           bgColor="#f0f0f0"
-          padding={6}
+          padding={3}
           gap={4}
         >
           <Typography
@@ -168,7 +168,7 @@ export default function Home() {
             {name}
           </Typography>
           <Typography
-            variant="h3"
+            variant="h4"
             color="#333"
             textAlign="right"
             justifyContent="right"
@@ -176,7 +176,7 @@ export default function Home() {
             {quantity}
           </Typography>
           <Typography
-            variant="h3"
+            variant="h5"
             color="#333"
             textAlign="right"
             justifyContent="right"
@@ -189,7 +189,7 @@ export default function Home() {
               removeItem(name)
             }}
             sx={{
-              ":hover": {bgcolor: "darkblue"}
+              ":hover": {bgcolor: "green"}
             }}
         > Remove </Button>
         </Box>
