@@ -154,14 +154,13 @@ export default function Home() {
           width="100%"
           minHeight="150px"
           display="flex"
-          alignItems="center"
+          alignItems="left"
           justifyContent="space-between"
           bgColor="#f0f0f0"
-          padding={3}
-          gap={4}
+          padding={7}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             color="#333"
             textAlign="center"
           >
@@ -189,7 +188,7 @@ export default function Home() {
               removeItem(name)
             }}
             sx={{
-              ":hover": {bgcolor: "green"}
+              ":hover": {bgcolor: "red"}
             }}
         > Remove </Button>
         </Box>
