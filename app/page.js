@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import * as React from 'react'
 import {firestore} from '@/firebase'
 import {Search, SearchIconWrapper, StyledInputBase} from '@/searchbar'
-import {Box, Modal, Typography, Stack, TextField, Button, Fab, AppBar, Toolbar, IconButton} from '@mui/material'
+import {Box, Modal, Typography, Stack, TextField, Button, Fab, AppBar, Toolbar, IconButton, Divider} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
@@ -49,7 +49,7 @@ export default function Home() {
 
     if (docSnap.exists()){ 
       const {quantity}= docSnap.data()
-      await setDoc(docRef, {quantity: quantity+1})
+      await setDoc(docRef, {quantity: quantity+1, expire:date, brand: brandName})
     }
     else{
       await setDoc(docRef, {quantity:1, expire:date, brand: brandName})
@@ -135,6 +135,7 @@ export default function Home() {
         >
           <Typography variant= "h6"> Add items</Typography>
           <Stack direction="column" spacing={2}>
+          <Typography variant= "h8"> Item</Typography>
           <TextField
             variant="outlined"
             fullWidth
@@ -143,6 +144,7 @@ export default function Home() {
               setItemName(e.target.value)
             }}
           />
+          <Typography variant= "h8"> Brand</Typography>
           <TextField
             variant="outlined"
             fullWidth
@@ -151,6 +153,7 @@ export default function Home() {
               setBrand(e.target.value)
             }}
           />
+          <Typography variant= "h8"> Expiration Date (Optional)</Typography>
           <TextField
             variant="outlined"
             fullWidth
@@ -187,6 +190,14 @@ export default function Home() {
           Inventory Items
         </Typography>
       </Box>
+      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" >
+    <Stack display="flex" justifyContent="space-evenly" width= "700px" height= "100px" flexDirection="row" spacing= {2} divider={<Divider orientation="vertical" flexItem />}>
+    <Typography variant= "h6"> Brand</Typography>
+    <Typography variant= "h6"> Item</Typography>
+    <Typography variant= "h6"> Quantity</Typography>
+    <Typography variant= "h6"> Expiration Date</Typography>
+    </Stack>
+  </Box>
     <Stack
       width= "800px"
       height= "500px"
@@ -206,6 +217,14 @@ export default function Home() {
           padding={7}
         >
           <Typography
+            variant="h5"
+            color="#333"
+            textAlign="right"
+            justifyContent="center"
+          >
+            {brand}
+          </Typography>
+          <Typography
             variant="h4"
             color="#333"
             textAlign="center"
@@ -224,21 +243,13 @@ export default function Home() {
             variant="h5"
             color="#333"
             textAlign="right"
-            justifyContent="center"
-          >
-            {brand}
-          </Typography>
-          <Typography
-            variant="h5"
-            color="#333"
-            textAlign="right"
             justifyContent="right"
           >
             {expire}
           </Typography>
           <Fab size= "medium"sx={{":hover": {bgcolor: "green"}
             }} onClick={()=> {
-              addItem(name, brand, expire)
+              addItem(name, expire, brand)
             }}>
               <Typography 
           variant= "h4" 
@@ -249,7 +260,7 @@ export default function Home() {
           
           <Fab size= "medium"sx={{":hover": {bgcolor: "red"}
             }} onClick={()=> {
-              removeItem(name, brand, expire)
+              removeItem(name, expire, brand)
             }}>
               <Typography 
           variant= "h4" 
