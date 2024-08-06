@@ -133,7 +133,7 @@ export default function Home() {
             transform:"translate(-50%, -50%)" 
           }}
         >
-          <Typography variant= "h6"> Add items</Typography>
+          <Typography variant= "h6"> Add item:</Typography>
           <Stack direction="column" spacing={2}>
           <Typography variant= "h8"> Item</Typography>
           <TextField
@@ -190,7 +190,7 @@ export default function Home() {
           Inventory Items
         </Typography>
       </Box>
-      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" padding= {7} >
+      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" padding= {2} >
     <Stack alignItems= "center" display="flex" justifyContent="space-around" width= "700px" height= "100px" flexDirection="row" spacing= {2} divider={<Divider orientation="vertical" flexItem />}>
     <Typography variant= "h6"> Brand</Typography>
     <Typography variant= "h6"> Item</Typography>
@@ -201,7 +201,6 @@ export default function Home() {
     <Stack
       width= "800px"
       height= "500px"
-      spacing={2}
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
       {
@@ -214,7 +213,7 @@ export default function Home() {
           alignItems="left"
           justifyContent="space-between"
           bgColor="#f0f0f0"
-          padding={7}
+          padding={4}
         >
           <Typography
             variant="h5"
@@ -225,7 +224,7 @@ export default function Home() {
             <Box sx= {{textTransform: 'capitalize'}}>{brand}</Box>
           </Typography>
           <Typography
-            variant="h4"
+            variant="h5"
             color="#333"
             textAlign="center"
             justifyContent="center"
@@ -233,7 +232,7 @@ export default function Home() {
             <Box sx= {{textTransform: 'capitalize'}}>{name}</Box>
           </Typography>
           <Typography
-            variant="h4"
+            variant="h5"
             color="#333"
             textAlign="center"
             justifyContent="center"
