@@ -10,6 +10,7 @@ export default function Home() {
   const [open, setOpen]= useState(false)
   const [itemName, setItemName]= useState('')
   const [expire, setExpiration]= useState('')
+  const [brand, setBrand]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
     const snapshot= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
@@ -37,7 +38,7 @@ export default function Home() {
     }
     await updateInventory()
   }
-  const addItem= async(itemName, date)=> {
+  const addItem= async(itemName, date, brandName)=> {
 
     const docRef= doc(collection(firestore,'inventory'),itemName)
     const docSnap= await getDoc(docRef)
@@ -47,7 +48,7 @@ export default function Home() {
       await setDoc(docRef, {quantity: quantity+1})
     }
     else{
-      await setDoc(docRef, {quantity:1, expire:date})
+      await setDoc(docRef, {quantity:1, expire:date, brand: brandName})
     }
     await updateInventory()
   }
@@ -85,13 +86,21 @@ export default function Home() {
           }}
         >
           <Typography variant= "h6"> Add items</Typography>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="column" spacing={2}>
           <TextField
             variant="outlined"
             fullWidth
             value={itemName}
             onChange={(e) => {
               setItemName(e.target.value)
+            }}
+          />
+          <TextField
+            variant="outlined"
+            fullWidth
+            value={brand}
+            onChange={(e) => {
+              setBrand(e.target.value)
             }}
           />
           <TextField
@@ -105,7 +114,7 @@ export default function Home() {
             <Button
               variant="outlined"
               onClick={() => {
-                addItem(itemName, expire)
+                addItem(itemName, expire, brand)
                 setItemName('')
                 handleClose()
               }}
@@ -148,7 +157,7 @@ export default function Home() {
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
       {
-      inventory.map(({name, quantity, expire})=> (
+      inventory.map(({name, quantity, brand, expire})=> (
         <Box
           key= {name}
           width="100%"
@@ -173,6 +182,14 @@ export default function Home() {
             justifyContent="right"
           >
             {quantity}
+          </Typography>
+          <Typography
+            variant="h5"
+            color="#333"
+            textAlign="right"
+            justifyContent="center"
+          >
+            {brand}
           </Typography>
           <Typography
             variant="h5"
