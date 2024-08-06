@@ -175,7 +175,7 @@ export default function Home() {
             </Stack>
         </Box>
       </Modal>
-    <Box border= "1px solid #333">
+    <Box border= "1px solid #333" divider={<Divider orientation="vertical" flexItem />}>
       <Box
       width="800px"
       height="100px"
@@ -190,14 +190,14 @@ export default function Home() {
           Inventory Items
         </Typography>
       </Box>
-      <Box  display= "flex" width= "600px" height= "100px"flexDirection="row" padding= {2} >
-    <Stack alignItems= "center" display="flex" justifyContent="space-around" width= "700px" height= "100px" flexDirection="row" spacing= {2} divider={<Divider orientation="vertical" flexItem />}>
+  
+    <Stack alignItems= "center" justifyContent="space-evenly" width= "700px" height= "100px" flexDirection="row"  divider={<Divider orientation="vertical" flexItem />}>
     <Typography variant= "h6"> Brand</Typography>
     <Typography variant= "h6"> Item</Typography>
     <Typography variant= "h6"> Quantity</Typography>
     <Typography variant= "h6"> Expiration Date</Typography>
     </Stack>
-  </Box>
+  
     <Stack
       width= "800px"
       height= "500px"
