@@ -143,7 +143,7 @@ export default function Home() {
       </Box>
     <Stack
       width= "800px"
-      height= "300px"
+      height= "500px"
       spacing={2}
       overflow= "auto" /*handles how too many items work. hidden would hide the etxra items */
     >
@@ -155,9 +155,10 @@ export default function Home() {
           minHeight="150px"
           display="flex"
           alignItems="center"
-          justifyContent="source-between"
+          justifyContent="space-between"
           bgColor="#f0f0f0"
           padding={6}
+          gap={4}
         >
           <Typography
             variant="h3"
