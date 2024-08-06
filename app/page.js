@@ -8,7 +8,8 @@ import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'fireba
 export default function Home() {
   const [inventory, setInventory]= useState([])
   const [open, setOpen]= useState(false)
-  const [itemName, setItemName, setExpiration]= useState('')
+  const [itemName, setItemName]= useState('')
+  const [expire, setExpiration]= useState('')
 
   const updateInventory= async()=>{ /*updates inventory asynchronously so website doesn't go down when updating it */
     const snapshot= query(collection(firestore,'inventory')) /*query to look at items in inventory firebase */
@@ -119,6 +120,9 @@ export default function Home() {
         onClick={()=> {
           handleOpen()
         }}
+        sx={{
+          ":hover": {bgcolor: "darkblue"}
+        }}
       >
         Add New Item
       </Button>
@@ -153,7 +157,7 @@ export default function Home() {
           alignItems="center"
           justifyContent="source-between"
           bgColor="#f0f0f0"
-          padding={5}
+          padding={6}
         >
           <Typography
             variant="h3"
@@ -165,14 +169,16 @@ export default function Home() {
           <Typography
             variant="h3"
             color="#333"
-            textAlign="center"
+            textAlign="right"
+            justifyContent="right"
           >
             {quantity}
           </Typography>
           <Typography
             variant="h3"
             color="#333"
-            textAlign="center"
+            textAlign="right"
+            justifyContent="right"
           >
             {expire}
           </Typography>
@@ -180,6 +186,9 @@ export default function Home() {
             variant="contained"
             onClick={()=> {
               removeItem(name)
+            }}
+            sx={{
+              ":hover": {bgcolor: "darkblue"}
             }}
         > Remove </Button>
         </Box>
