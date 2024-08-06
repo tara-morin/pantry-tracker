@@ -1,8 +1,10 @@
 'use client'
 import Image from "next/image";
 import {useState, useEffect} from 'react'
+import * as React from 'react'
 import {firestore} from '@/firebase'
-import {Box, Modal, Typography, Stack, TextField, Button} from '@mui/material'
+import {Box, Modal, Typography, Stack, TextField, Button, Fab} from '@mui/material'
+// import {AddIcon} from '@mui/icons-material/Add'
 import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
 
 export default function Home() {
@@ -23,7 +25,7 @@ export default function Home() {
     })})
     setInventory(inventoryList)
   }
-  const removeItem= async(itemName)=> {
+  const removeItem= async(itemName, date, brandName)=> {
     const docRef= doc(collection(firestore,'inventory'),itemName)
     const docSnap= await getDoc(docRef) /*gets the doc if it exists */
 
@@ -33,7 +35,7 @@ export default function Home() {
         await deleteDoc(docRef)
       }
       else{ /* otherwise just decrease the quantity by 1*/
-        await setDoc(docRef, {quantity: quantity-1})
+        await setDoc(docRef, {quantity: quantity-1}, {expire:date}, {brand: brandName})
       }
     }
     await updateInventory()
@@ -199,15 +201,27 @@ export default function Home() {
           >
             {expire}
           </Typography>
-          <Button 
-            variant="contained"
-            onClick={()=> {
-              removeItem(name)
-            }}
-            sx={{
-              ":hover": {bgcolor: "red"}
-            }}
-        > Remove </Button>
+          <Fab size= "medium"sx={{":hover": {bgcolor: "green"}
+            }} onClick={()=> {
+              addItem(name, brand, expire)
+            }}>
+              <Typography 
+          variant= "h4" 
+          color="#4287f5">
+          +
+        </Typography>
+          </Fab>
+          
+          <Fab size= "medium"sx={{":hover": {bgcolor: "red"}
+            }} onClick={()=> {
+              removeItem(name, brand, expire)
+            }}>
+              <Typography 
+          variant= "h4" 
+          color="#4287f5">
+          -
+        </Typography>
+          </Fab>
         </Box>
       ))
     }
