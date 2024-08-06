@@ -3,8 +3,10 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import * as React from 'react'
 import {firestore} from '@/firebase'
-import {Box, Modal, Typography, Stack, TextField, Button, Fab} from '@mui/material'
-// import {AddIcon} from '@mui/icons-material/Add'
+import {Search, SearchIconWrapper, StyledInputBase} from '@/searchbar'
+import {Box, Modal, Typography, Stack, TextField, Button, Fab, AppBar, Toolbar, IconButton} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
 import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
 
 export default function Home() {
@@ -19,7 +21,7 @@ export default function Home() {
     const docs= await getDocs(snapshot)
     const inventoryList= [] /*makes empty list to put our items in */
     docs.forEach((doc)=> { /*for each doc in the inventory collection we add it to the list */
-    inventoryList.push({
+      inventoryList.push({
       name: doc.id,
       ...doc.data(),
     })})
@@ -35,7 +37,7 @@ export default function Home() {
         await deleteDoc(docRef)
       }
       else{ /* otherwise just decrease the quantity by 1*/
-        await setDoc(docRef, {quantity: quantity-1}, {expire:date}, {brand: brandName})
+        await setDoc(docRef, {quantity: quantity-1, expire:date, brand: brandName})
       }
     }
     await updateInventory()
@@ -61,7 +63,51 @@ export default function Home() {
 
   const handleOpen= ()=> setOpen(true)
   const handleClose= () => setOpen(false)
-  return (<Box 
+  return (
+    <div>
+    <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          sx={{ mr: 2 }}
+        >
+        </IconButton>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        >
+          MUI
+        </Typography>
+        <Button 
+        variant="contained"
+        onClick={()=> {
+          handleOpen()
+        }}
+        sx={{
+          ":hover": {bgcolor: "green"}
+        }}
+      >
+        Add New Item
+      </Button>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
+      </Toolbar>
+    </AppBar>
+  </Box>
+  <Box 
           width="100vw" 
           height="100vh" 
           display="flex" 
@@ -126,17 +172,6 @@ export default function Home() {
             </Stack>
         </Box>
       </Modal>
-      <Button 
-        variant="contained"
-        onClick={()=> {
-          handleOpen()
-        }}
-        sx={{
-          ":hover": {bgcolor: "green"}
-        }}
-      >
-        Add New Item
-      </Button>
     <Box border= "1px solid #333">
       <Box
       width="800px"
@@ -228,7 +263,10 @@ export default function Home() {
     </Stack>
     </Box>
     </Box>
+    </div>
   )
+
+
 }
 
 /* 100 means it will be 100% the width of the component, justifycontent centers it horixontally, align items centers it vertically*/
