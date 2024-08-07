@@ -3,10 +3,7 @@ import Image from "next/image";
 import {useState, useEffect} from 'react'
 import * as React from 'react'
 import {firestore} from '@/firebase'
-import {Search, SearchIconWrapper, StyledInputBase} from '@/searchbar'
 import {Box, Modal, Typography, Stack, TextField, Button, Fab, AppBar, Toolbar, IconButton, Divider} from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
-import SearchIcon from '@mui/icons-material/Search'
 import {collection, deleteDoc, getDocs, query, setDoc, getDoc, doc} from 'firebase/firestore'
 
 export default function Home() {
@@ -82,9 +79,10 @@ export default function Home() {
           component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
         >
-          MUI
+          MyPantry
         </Typography>
         <Button 
+        bgColor= "#00f7ff"
         variant="contained"
         onClick={()=> {
           handleOpen()
@@ -95,15 +93,7 @@ export default function Home() {
       >
         Add New Item
       </Button>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
+        
       </Toolbar>
     </AppBar>
   </Box>
@@ -187,15 +177,23 @@ export default function Home() {
         <Typography 
           variant= "h2" 
           color="#333">
-          Inventory Items
+          Inventory
         </Typography>
       </Box>
   
-    <Stack alignItems= "center" justifyContent="space-evenly" width= "700px" height= "100px" flexDirection="row"  divider={<Divider orientation="vertical" flexItem />}>
-    <Typography variant= "h6"> Brand</Typography>
-    <Typography variant= "h6"> Item</Typography>
-    <Typography variant= "h6"> Quantity</Typography>
-    <Typography variant= "h6"> Expiration Date</Typography>
+    <Stack flexDirection="row" alignContent="center">
+    <Box width= "150px" height= "100px" textAlign="center" >
+    <Typography variant= "h6" alignItems= "center" fontWeight= "bold" sx={{color:'#005eff'}}> Brand</Typography>
+    </Box>
+    <Box width= "155px" height= "100px">
+    <Typography variant= "h6"fontWeight= "bold" textAlign="center" sx={{color:'#005eff'}}> Item</Typography>
+    </Box>
+    <Box width= "120px" height= "100px"  >
+    <Typography variant= "h6"  textAlign="center" fontWeight= "bold" sx={{color:'#005eff'}}> Quantity</Typography>
+    </Box>
+    <Box width= "50px" height= "100px" textAlign="center" >
+    <Typography variant= "h6"  fontWeight= "bold" sx={{color:'#005eff'}}> Expiration Date</Typography>
+    </Box>
     </Stack>
   
     <Stack
